@@ -13,10 +13,10 @@ type FormProps = {
 const Form = ({ onSubmit }: FormProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (e: React.MouseEvent<HTMLFormElement>) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const title = inputRef.current?.value ?? "";
     if (title === "") return;
-    e.preventDefault();
     onSubmit({ id: Date.now(), title, isCompleted: false });
     inputRef.current!.value = ""
   };
