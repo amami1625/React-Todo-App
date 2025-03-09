@@ -10,6 +10,7 @@ function App() {
     {id: 3, title: "sample3", isCompleted: false},
   ]
   const [todos, setTodos] = useState<Todo[]>(tempTodos);
+  const [completedTodos, setCompletedTodos] = useState<string[]>([]);
 
   const handleTodoDelete = (id: number) => {
     setTodos(todos.filter(todo => todo.id !== id));
