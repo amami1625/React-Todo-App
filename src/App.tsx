@@ -11,10 +11,14 @@ function App() {
   ]
   const [todos, setTodos] = useState<Todo[]>(tempTodos);
 
+  const handleTodoDelete = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
   return (
     <>
       <TodoList>
-        {todos.map(todo => <TodoItem todo={todo} key={todo.id}/>)}
+        {todos.map(todo => <TodoItem todo={todo} onDelete={handleTodoDelete} key={todo.id}/>)}
       </TodoList>
     </>
   )
