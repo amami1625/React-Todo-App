@@ -1,5 +1,6 @@
 import { useState } from "react"
 import TodoList from "./components/TodoList"
+import { Todo } from "./types/type";
 
 function App() {
   const tempTodos = [
@@ -7,7 +8,7 @@ function App() {
     {id: 2, title: "sample2", isCompleted: false},
     {id: 3, title: "sample3", isCompleted: false},
   ]
-  const [todos, setTodos] = useState(tempTodos);
+  const [todos, setTodos] = useState<Todo[]>(tempTodos);
 
   return (
     <>
