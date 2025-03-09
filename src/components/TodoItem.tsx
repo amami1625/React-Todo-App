@@ -11,7 +11,7 @@ type TodoItemProps = {
 };
 
 const TodoItem = ({ todo, onDelete }: TodoItemProps) => {
-  const handlerDelete = () => {
+  const deleteHandler = () => {
     if (!confirm("Todo を削除しますか？")) return;
     onDelete(todo.id);
   };
@@ -20,7 +20,7 @@ const TodoItem = ({ todo, onDelete }: TodoItemProps) => {
     <Li>
       <Label>{todo.title}</Label>
       <Button>完了</Button>
-      <Button onClick={handlerDelete}>削除</Button>
+      <Button onClick={deleteHandler}>削除</Button>
     </Li>
   );
 };
