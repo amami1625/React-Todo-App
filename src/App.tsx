@@ -3,6 +3,7 @@ import TodoList from "./components/TodoList";
 import { Todo } from "./types/type";
 import TodoItem from "./components/TodoItem";
 import Header from "./components/Header";
+import Form from "./components/Form";
 
 function App() {
   const tempTodos = [
@@ -26,6 +27,7 @@ function App() {
   return (
     <>
       <Header />
+      <Form />
       <TodoList>
         {todos.map((todo) => (
           <TodoItem
