@@ -2,6 +2,7 @@ import { useState } from "react";
 import TodoList from "./components/TodoList";
 import { Todo } from "./types/type";
 import TodoItem from "./components/TodoItem";
+import Header from "./components/Header";
 
 function App() {
   const tempTodos = [
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <TodoList>
         {todos.map((todo) => (
           <TodoItem
