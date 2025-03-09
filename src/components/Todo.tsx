@@ -1,8 +1,11 @@
-import React from 'react'
+import styled from 'styled-components'
+
+const Li = styled.li`
+`
 
 const Todo = () => {
   return (
-    <div>Todo</div>
+    <Li>Todo</Li>
   )
 }
 
