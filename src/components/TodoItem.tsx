@@ -3,10 +3,10 @@ import styled from 'styled-components'
 const Li = styled.li`
 `
 
-const Todo = () => {
+const TodoItem = () => {
   return (
     <Li>Todo</Li>
   )
 }
 
-export default Todo
+export default TodoItem
