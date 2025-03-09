@@ -24,10 +24,14 @@ function App() {
     setCompletedTodos([...completedTodos, completeTodo.title]);
   };
 
+  const handleTodoAdd = (newTodo: Todo) => {
+    setTodos([...todos, newTodo]);
+  };
+
   return (
     <>
       <Header />
-      <Form />
+      <Form onSubmit={handleTodoAdd}/>
       <TodoList>
         {todos.map((todo) => (
           <TodoItem
