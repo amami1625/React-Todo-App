@@ -18,7 +18,7 @@ const Form = ({ onSubmit }: FormProps) => {
     const title = inputRef.current?.value ?? "";
     if (title === "") return;
     onSubmit({ id: Date.now(), title, isCompleted: false });
-    inputRef.current!.value = ""
+    if (inputRef.current) inputRef.current.value = "";
   };
 
   return (
