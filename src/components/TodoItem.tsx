@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Todo } from "../types/type";
 
 const Li = styled.li``;
-const Input = styled.input``;
 const Label = styled.label``;
+const Button = styled.button``;
 
 type TodoItemProps = {
   todo: Todo;
@@ -12,10 +12,9 @@ type TodoItemProps = {
 const TodoItem = ({ todo }: TodoItemProps) => {
   return (
     <Li>
-      <Label>
-        <Input type="checkbox" />
-        {todo.title}
-      </Label>
+      <Label>{todo.title}</Label>
+      <Button>完了</Button>
+      <Button>削除</Button>
     </Li>
   );
 };
