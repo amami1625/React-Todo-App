@@ -5,6 +5,7 @@ import Form from "./components/Form";
 import { useTodos } from "./hooks/useTodos";
 import CompletedList from "./components/CompletedList";
 import CompletedListItem from "./components/CompletedListItem";
+import Container from "./components/common/Container";
 
 function App() {
   const {
@@ -19,22 +20,27 @@ function App() {
   return (
     <>
       <Header />
-      <Form addHandler={handleTodoAdd} />
-      <TodoList>
-        {todos.map((todo) => (
-          <TodoItem
-            todo={todo}
-            updateHandler={handleTodoUpdate}
-            deleteHandler={handleTodoDelete}
-            key={todo.id}
-          />
-        ))}
-      </TodoList>
-      <CompletedList todos={completedTodos} permanentlyDeleteHandler={handleTodoDeleteCompleted}>
-        {completedTodos.map((todo) => (
-          <CompletedListItem todo={todo.title} key={todo.id} />
-        ))}
-      </CompletedList>
+      <Container>
+        <Form addHandler={handleTodoAdd} />
+        <TodoList>
+          {todos.map((todo) => (
+            <TodoItem
+              todo={todo}
+              updateHandler={handleTodoUpdate}
+              deleteHandler={handleTodoDelete}
+              key={todo.id}
+            />
+          ))}
+        </TodoList>
+        <CompletedList
+          todos={completedTodos}
+          permanentlyDeleteHandler={handleTodoDeleteCompleted}
+        >
+          {completedTodos.map((todo) => (
+            <CompletedListItem todo={todo.title} key={todo.id} />
+          ))}
+        </CompletedList>
+      </Container>
     </>
   );
 }

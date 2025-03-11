@@ -1,7 +1,15 @@
 import styled from "styled-components";
 
-const HeaderElm = styled.header``;
-const H1 = styled.h1``;
+const HeaderElm = styled.header`
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: rgb(130, 192, 255);
+`;
+const H1 = styled.h1`
+  font-size: 2rem;
+`;
 
 const Header = () => {
   return (

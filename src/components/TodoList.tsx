@@ -6,7 +6,10 @@ const Ul = styled.ul`
   margin: 0;
   padding: 0;
 `;
-const H2 = styled.h2``;
+const H2 = styled.h2`
+  font-size: 1.8rem;
+  text-align: center;
+`;
 
 type TodoListProps = {
   children: ReactElement[];

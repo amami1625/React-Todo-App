@@ -1,9 +1,22 @@
 import styled from "styled-components";
 import { Todo } from "../types/type";
+import Button from "./common/Button";
 
-const Li = styled.li``;
-const Label = styled.label``;
-const Button = styled.button``;
+const Li = styled.li`
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+`;
+const Label = styled.label`
+  font-size: 1.3rem;
+  flex-grow: 1;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
 
 type TodoItemProps = {
   todo: Todo;
@@ -12,12 +25,13 @@ type TodoItemProps = {
 };
 
 const TodoItem = ({ todo, deleteHandler, updateHandler }: TodoItemProps) => {
-
   return (
     <Li>
       <Label>{todo.title}</Label>
-      <Button onClick={() => deleteHandler(todo.id)}>削除</Button>
-      <Button onClick={() => updateHandler(todo.id)}>完了</Button>
+      <Wrapper>
+        <Button text="完了" clickHandler={() => updateHandler(todo.id)} />
+        <Button text="削除" clickHandler={() => deleteHandler(todo.id)} />
+      </Wrapper>
     </Li>
   );
 };

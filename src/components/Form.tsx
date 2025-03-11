@@ -1,9 +1,20 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
+import Button from "./common/Button";
 
-const FormElm = styled.form``;
-const Input = styled.input``;
-const Button = styled.button``;
+const FormElm = styled.form`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`;
+const Input = styled.input`
+  flex-grow: 1;
+  font-size: 1rem;
+  padding: 0.8rem;
+  margin-right: 1rem;
+  border: solid 1px #ccc;
+  border-radius: 4px;
+`;
 
 type FormProps = {
   addHandler: (title: string) => void;
@@ -23,7 +34,7 @@ const Form = ({ addHandler }: FormProps) => {
   return (
     <FormElm onSubmit={submitHandler}>
       <Input type="text" ref={inputRef} />
-      <Button>タスクを追加</Button>
+      <Button text="タスクを追加"/>
     </FormElm>
   );
 };
