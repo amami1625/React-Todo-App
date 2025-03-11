@@ -13,6 +13,7 @@ function App() {
     handleTodoAdd,
     handleTodoUpdate,
     handleTodoDelete,
+    handleTodoDeleteCompleted,
   } = useTodos();
 
   return (
@@ -29,7 +30,7 @@ function App() {
           />
         ))}
       </TodoList>
-      <CompletedList>
+      <CompletedList todos={completedTodos} permanentlyDeleteHandler={handleTodoDeleteCompleted}>
         {completedTodos.map((todo) => (
           <CompletedListItem todo={todo.title} key={todo.id} />
         ))}
