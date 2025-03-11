@@ -1,23 +1,22 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import { Todo } from "../types/type";
 
 const FormElm = styled.form``;
 const Input = styled.input``;
 const Button = styled.button``;
 
 type FormProps = {
-  onSubmit: (newTodo: Todo) => void;
+  addHandler: (title: string) => void;
 };
 
-const Form = ({ onSubmit }: FormProps) => {
+const Form = ({ addHandler }: FormProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const title = inputRef.current?.value ?? "";
     if (title === "") return;
-    onSubmit({ id: Date.now(), title, isCompleted: false });
+    addHandler(title);
     if (inputRef.current) inputRef.current.value = "";
   };
 
