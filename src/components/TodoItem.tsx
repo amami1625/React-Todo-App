@@ -8,14 +8,16 @@ const Button = styled.button``;
 type TodoItemProps = {
   todo: Todo;
   deleteHandler: (documentId: string) => void;
+  updateHandler: (id: string) => void;
 };
 
-const TodoItem = ({ todo, deleteHandler }: TodoItemProps) => {
+const TodoItem = ({ todo, deleteHandler, updateHandler }: TodoItemProps) => {
 
   return (
     <Li>
       <Label>{todo.title}</Label>
       <Button onClick={() => deleteHandler(todo.id)}>削除</Button>
+      <Button onClick={() => updateHandler(todo.id)}>完了</Button>
     </Li>
   );
 };
