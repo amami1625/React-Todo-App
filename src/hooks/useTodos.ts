@@ -6,20 +6,25 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
     const fetchTodos = async () => {
       const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
-        const todosData = snapshot.docs.map((doc) => ({
+        const docs = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         })) as Todo[];
-        setTodos(todosData);
+        const todos = docs.filter((doc) => !doc.isCompleted);
+        const completedTodos = docs.filter((doc) => doc.isCompleted);
+        setTodos(todos);
+        setCompletedTodos(completedTodos);
       });
       return () => unsubscribe();
     };
@@ -38,6 +43,13 @@ export const useTodos = () => {
     }
   };
 
+  const handleTodoUpdate = async (id: string) => {
+    const completed = doc(db, "todos", id);
+    await updateDoc(completed, {
+      isCompleted: true,
+    });
+  };
+
   const handleTodoDelete = async (id: string) => {
     try {
       await deleteDoc(doc(db, "todos", id));
@@ -48,7 +60,9 @@ export const useTodos = () => {
 
   return {
     todos,
+    completedTodos,
     handleTodoAdd,
+    handleTodoUpdate,
     handleTodoDelete,
   };
 };
