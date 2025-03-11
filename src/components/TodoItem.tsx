@@ -7,26 +7,15 @@ const Button = styled.button``;
 
 type TodoItemProps = {
   todo: Todo;
-  onDelete: (id: string) => void;
-  onComplete: (id: string) => void;
+  deleteHandler: (documentId: string) => void;
 };
 
-const TodoItem = ({ todo, onDelete, onComplete }: TodoItemProps) => {
-  const deleteHandler = () => {
-    if (!confirm("タスクを削除しますか？")) return;
-    onDelete(todo.id);
-  };
-
-  const completeHandler = () => {
-    if (!confirm("タスクを完了しますか？")) return;
-    onComplete(todo.id);
-  };
+const TodoItem = ({ todo, deleteHandler }: TodoItemProps) => {
 
   return (
     <Li>
       <Label>{todo.title}</Label>
-      <Button onClick={completeHandler}>完了</Button>
-      <Button onClick={deleteHandler}>削除</Button>
+      <Button onClick={() => deleteHandler(todo.id)}>削除</Button>
     </Li>
   );
 };
