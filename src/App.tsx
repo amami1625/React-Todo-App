@@ -30,7 +30,9 @@ function App() {
         ))}
       </TodoList>
       <CompletedList>
-        {completedTodos.map(todo => <CompletedListItem todo={todo.title}/>)}
+        {completedTodos.map((todo) => (
+          <CompletedListItem todo={todo.title} key={todo.id} />
+        ))}
       </CompletedList>
     </>
   );
