@@ -5,48 +5,50 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDocs,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [completedTodos, setCompletedTodos] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const querySnapshot = await getDocs(collection(db, "todos"));
-      const todosData = querySnapshot.docs.map((todo) => ({
-        id: todo.id,
-        ...todo.data(),
-      })) as Todo[];
-      setTodos(todosData);
+      const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
+        const todosData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Todo[];
+        setTodos(todosData);
+      });
+      return () => unsubscribe();
     };
 
     fetchTodos();
   }, []);
 
-  const handleTodoAdd = async (newTodo: Todo) => {
-    await addDoc(collection(db, "todos"), newTodo);
-    setTodos([...todos, newTodo]);
-  };
-
-  const handleTodoComplete = (id: string) => {
-    const completeTodo = todos[todos.findIndex((todo) => todo.id === id)];
-    setTodos(todos.filter((todo) => todo.id !== id));
-    setCompletedTodos([...completedTodos, completeTodo.title]);
+  const handleTodoAdd = async (title: string) => {
+    try {
+      await addDoc(collection(db, "todos"), {
+        title,
+        isCompleted: false,
+      });
+    } catch (err) {
+      console.error("タスクの追加に失敗しました: ", err);
+    }
   };
 
   const handleTodoDelete = async (id: string) => {
-    await deleteDoc(doc(db, "todos", id));
-    setTodos(todos.filter((todo) => todo.id !== id));
+    try {
+      await deleteDoc(doc(db, "todos", id));
+    } catch (err) {
+      console.error("タスクの削除に失敗しました: ", err);
+    }
   };
 
   return {
     todos,
-    completedTodos,
     handleTodoAdd,
-    handleTodoComplete,
     handleTodoDelete,
   };
 };
