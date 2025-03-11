@@ -58,11 +58,22 @@ export const useTodos = () => {
     }
   };
 
+  const handleTodoDeleteCompleted = async (todos: Todo[]) => {
+    try {
+      await Promise.all(
+        todos.map((todo) => deleteDoc(doc(db, "todos", todo.id)))
+      );
+    } catch (err) {
+      console.error("タスクの削除に失敗しました: ", err);
+    }
+  };
+
   return {
     todos,
     completedTodos,
     handleTodoAdd,
     handleTodoUpdate,
     handleTodoDelete,
+    handleTodoDeleteCompleted,
   };
 };
