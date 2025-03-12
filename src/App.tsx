@@ -5,14 +5,14 @@ import Form from "./components/Form";
 import { useTodos } from "./hooks/useTodos";
 import Container from "./components/common/Container";
 import CompletedListModal from "./components/modal/CompletedListModal";
-import { useCompleted } from "./hooks/useCompleted";
 import Button from "./components/common/Button";
+import { useModal } from "./context/ModalProvider";
 
 function App() {
   const { todos, handleTodoAdd, handleTodoUpdate, handleTodoDelete } =
     useTodos();
 
-  const { showCompletedModal, toggleCompletedModal } = useCompleted();
+  const { showCompletedModal, toggleCompletedModal } = useModal();
 
   return (
     <>

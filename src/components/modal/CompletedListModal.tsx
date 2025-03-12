@@ -4,11 +4,11 @@ import { useTodos } from "../../hooks/useTodos";
 import Modal from "../common/Modal";
 import Button from "../common/Button";
 import CloseButton from "../common/CloseButton";
-import { useCompleted } from "../../hooks/useCompleted";
+import { useModal } from "../../context/ModalProvider";
 
 const CompletedListModal = () => {
   const { completedTodos, handleTodoDeleteCompleted } = useTodos();
-  const { toggleCompletedModal } = useCompleted()
+    const { toggleCompletedModal } = useModal();
 
   return (
     <Modal>
