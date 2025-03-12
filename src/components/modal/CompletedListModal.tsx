@@ -8,17 +8,20 @@ import { useModal } from "../../context/ModalProvider";
 
 const CompletedListModal = () => {
   const { completedTodos, handleTodoDeleteCompleted } = useTodos();
-    const { toggleCompletedModal } = useModal();
+  const { toggleCompletedModal } = useModal();
 
   return (
     <Modal>
-      <CloseButton clickHandler={toggleCompletedModal}/>
+      <CloseButton clickHandler={toggleCompletedModal} />
       <CompletedList todos={completedTodos}>
         {completedTodos.map((todo) => (
-          <CompletedListItem todo={todo.title} key={todo.id} />
+          <CompletedListItem todo={todo} key={todo.id} />
         ))}
       </CompletedList>
-      <Button text="完了済みのタスクを削除" clickHandler={() => handleTodoDeleteCompleted(completedTodos)}/>
+      <Button
+        text="完了済みのタスクを削除"
+        clickHandler={() => handleTodoDeleteCompleted(completedTodos)}
+      />
     </Modal>
   );
 };

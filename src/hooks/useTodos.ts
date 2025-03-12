@@ -38,10 +38,10 @@ export const useTodos = () => {
     }
   }, []);
 
-  const handleTodoUpdate = useCallback(async (id: string) => {
+  const handleTodoUpdate = useCallback(async (id: string, isCompleted: boolean) => {
     const completed = doc(db, "todos", id);
     await updateDoc(completed, {
-      isCompleted: true,
+      isCompleted: !isCompleted,
     });
   }, []);
 

@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 type TodoItemProps = {
   todo: Todo;
   deleteHandler: (documentId: string) => void;
-  updateHandler: (id: string) => void;
+  updateHandler: (id: string, isCompleted: boolean) => void;
 };
 
 const TodoItem = React.memo(
@@ -31,7 +31,7 @@ const TodoItem = React.memo(
       <Li>
         <Label>{todo.title}</Label>
         <Wrapper>
-          <Button text="完了" clickHandler={() => updateHandler(todo.id)} />
+          <Button text="完了" clickHandler={() => updateHandler(todo.id, todo.isCompleted)} />
           <Button text="削除" clickHandler={() => deleteHandler(todo.id)} />
         </Wrapper>
       </Li>
