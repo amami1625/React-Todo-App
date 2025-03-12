@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -22,12 +23,12 @@ type CloseButtonProps = {
   clickHandler: () => void;
 };
 
-const CloseButton = ({ clickHandler }: CloseButtonProps) => {
+const CloseButton = React.memo(({ clickHandler }: CloseButtonProps) => {
   return (
     <Div>
       <Span onClick={clickHandler}>x</Span>
     </Div>
   );
-};
+});
 
 export default CloseButton;
