@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const ButtonElm = styled.button`
@@ -22,12 +23,14 @@ type ButtonProps = {
   width?: string;
 };
 
-const Button = ({ text, clickHandler, width = "240px" }: ButtonProps) => {
-  return (
-    <ButtonElm onClick={clickHandler} style={{ maxWidth: width }}>
-      {text}
-    </ButtonElm>
-  );
-};
+const Button = React.memo(
+  ({ text, clickHandler, width = "240px" }: ButtonProps) => {
+    return (
+      <ButtonElm onClick={clickHandler} style={{ maxWidth: width }}>
+        {text}
+      </ButtonElm>
+    );
+  }
+);
 
 export default Button;
