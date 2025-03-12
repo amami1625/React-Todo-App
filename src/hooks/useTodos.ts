@@ -38,34 +38,35 @@ export const useTodos = () => {
     }
   }, []);
 
-  const handleTodoUpdate = useCallback(async (id: string, isCompleted: boolean) => {
-    const completed = doc(db, "todos", id);
-    await updateDoc(completed, {
-      isCompleted: !isCompleted,
-    });
-  }, []);
+  const handleTodoUpdate = useCallback(
+    async (id: string, isCompleted: boolean) => {
+      const completed = doc(db, "todos", id);
+      await updateDoc(completed, {
+        isCompleted: !isCompleted,
+      });
+    },
+    []
+  );
 
   const handleTodoDelete = useCallback(async (id: string) => {
+    if (!confirm("タスクを削除しますか？")) return;
     try {
-      if (confirm("タスクを削除しますか？")) {
-        await deleteDoc(doc(db, "todos", id));
-      }
+      await deleteDoc(doc(db, "todos", id));
     } catch (err) {
       console.error("タスクの削除に失敗しました: ", err);
     }
   }, []);
 
-  const handleTodoDeleteCompleted = useCallback(async (todos: Todo[]) => {
+  const handleTodoDeleteCompleted = useCallback(async () => {
+    if (!confirm("完了済みのタスクを削除しますか？")) return;
     try {
-      if (confirm("完了済みのタスクを削除しますか？")) {
-        await Promise.all(
-          todos.map((todo) => deleteDoc(doc(db, "todos", todo.id)))
-        );
-      }
+      await Promise.all(
+        completedTodos.map((todo) => deleteDoc(doc(db, "todos", todo.id)))
+      );
     } catch (err) {
       console.error("タスクの削除に失敗しました: ", err);
     }
-  }, []);
+  }, [completedTodos]);
 
   return {
     todos,

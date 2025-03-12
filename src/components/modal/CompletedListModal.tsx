@@ -20,7 +20,7 @@ const CompletedListModal = () => {
       </CompletedList>
       <Button
         text="完了済みのタスクを削除"
-        clickHandler={() => handleTodoDeleteCompleted(completedTodos)}
+        clickHandler={handleTodoDeleteCompleted}
       />
     </Modal>
   );
