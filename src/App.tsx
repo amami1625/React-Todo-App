@@ -3,19 +3,16 @@ import TodoItem from "./components/TodoItem";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import { useTodos } from "./hooks/useTodos";
-import CompletedList from "./components/CompletedList";
-import CompletedListItem from "./components/CompletedListItem";
 import Container from "./components/common/Container";
+import CompletedListModal from "./components/modal/CompletedListModal";
+import { useCompleted } from "./hooks/useCompleted";
+import Button from "./components/common/Button";
 
 function App() {
-  const {
-    todos,
-    completedTodos,
-    handleTodoAdd,
-    handleTodoUpdate,
-    handleTodoDelete,
-    handleTodoDeleteCompleted,
-  } = useTodos();
+  const { todos, handleTodoAdd, handleTodoUpdate, handleTodoDelete } =
+    useTodos();
+
+  const { showCompletedModal, toggleCompletedModal } = useCompleted();
 
   return (
     <>
@@ -32,15 +29,13 @@ function App() {
             />
           ))}
         </TodoList>
-        <CompletedList
-          todos={completedTodos}
-          permanentlyDeleteHandler={handleTodoDeleteCompleted}
-        >
-          {completedTodos.map((todo) => (
-            <CompletedListItem todo={todo.title} key={todo.id} />
-          ))}
-        </CompletedList>
+        <Button
+          text="完了済みのタスク"
+          clickHandler={toggleCompletedModal}
+          width={"500px"}
+        />
       </Container>
+      {showCompletedModal && <CompletedListModal />}
     </>
   );
 }

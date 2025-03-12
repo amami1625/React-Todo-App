@@ -1,7 +1,6 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
 import { Todo } from "../types/type";
-import Button from "./common/Button";
 
 const Ul = styled.ul`
   list-style: none;
@@ -15,24 +14,16 @@ const H2 = styled.h2`
 
 type CompletedListProps = {
   todos: Todo[];
-  permanentlyDeleteHandler: (todos: Todo[]) => Promise<void>;
   children: ReactElement[];
 };
 
 const CompletedList = ({
-  todos,
-  permanentlyDeleteHandler,
   children,
 }: CompletedListProps) => {
   return (
     <>
       <H2>完了済のタスク</H2>
       <Ul>{children}</Ul>
-      <Button
-        text="完了済みのタスクを削除する"
-        clickHandler={() => permanentlyDeleteHandler(todos)}
-        width={"500px"}
-      />
     </>
   );
 };
