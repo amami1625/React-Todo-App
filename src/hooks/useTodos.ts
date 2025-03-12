@@ -66,7 +66,7 @@ export const useTodos = () => {
     } catch (err) {
       console.error("タスクの削除に失敗しました: ", err);
     }
-  }, [completedTodos]);
+  }, []);
 
   return {
     todos,
