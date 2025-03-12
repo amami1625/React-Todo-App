@@ -20,7 +20,7 @@ type FormProps = {
   addHandler: (title: string) => void;
 };
 
-const Form = ({ addHandler }: FormProps) => {
+const Form = React.memo(({ addHandler }: FormProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,9 +34,9 @@ const Form = ({ addHandler }: FormProps) => {
   return (
     <FormElm onSubmit={submitHandler}>
       <Input type="text" ref={inputRef} />
-      <Button text="タスクを追加"/>
+      <Button text="タスクを追加" />
     </FormElm>
   );
-};
+});
 
 export default Form;
