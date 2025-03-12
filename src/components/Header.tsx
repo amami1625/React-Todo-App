@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const HeaderElm = styled.header`
@@ -11,12 +12,12 @@ const H1 = styled.h1`
   font-size: 2rem;
 `;
 
-const Header = () => {
+const Header = React.memo(() => {
   return (
     <HeaderElm>
       <H1>My Todo App(β)</H1>
     </HeaderElm>
   );
-};
+});
 
 export default Header;
