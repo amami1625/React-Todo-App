@@ -15,21 +15,16 @@ export const useTodos = () => {
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
-        const docs = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Todo[];
-        const todos = docs.filter((doc) => !doc.isCompleted);
-        const completedTodos = docs.filter((doc) => doc.isCompleted);
-        setTodos(todos);
-        setCompletedTodos(completedTodos);
-      });
-      return () => unsubscribe();
-    };
+    const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
+      const docs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Todo[];
 
-    fetchTodos();
+      setTodos(docs.filter((doc) => !doc.isCompleted));
+      setCompletedTodos(docs.filter((doc) => doc.isCompleted));
+    });
+    return () => unsubscribe(); // クリーンアップ処理
   }, []);
 
   const handleTodoAdd = useCallback(async (title: string) => {
