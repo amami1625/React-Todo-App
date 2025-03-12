@@ -52,7 +52,9 @@ export const useTodos = () => {
 
   const handleTodoDelete = async (id: string) => {
     try {
-      await deleteDoc(doc(db, "todos", id));
+      if (confirm("タスクを削除しますか？")) {
+        await deleteDoc(doc(db, "todos", id));
+      }
     } catch (err) {
       console.error("タスクの削除に失敗しました: ", err);
     }
@@ -60,9 +62,11 @@ export const useTodos = () => {
 
   const handleTodoDeleteCompleted = async (todos: Todo[]) => {
     try {
-      await Promise.all(
-        todos.map((todo) => deleteDoc(doc(db, "todos", todo.id)))
-      );
+      if (confirm("完了済みのタスクを削除しますか？")) {
+        await Promise.all(
+          todos.map((todo) => deleteDoc(doc(db, "todos", todo.id)))
+        );
+      }
     } catch (err) {
       console.error("タスクの削除に失敗しました: ", err);
     }
