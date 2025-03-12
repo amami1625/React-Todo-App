@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 const Ul = styled.ul`
@@ -12,7 +12,7 @@ const H2 = styled.h2`
 `;
 
 type TodoListProps = {
-  children: ReactElement[];
+  children: ReactNode;
 };
 
 const TodoList = ({ children }: TodoListProps) => {

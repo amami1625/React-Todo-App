@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 type ModalProps = {
-  children: ReactElement | ReactElement[];
+  children: ReactNode;
 };
 
 const ModalWrapper = styled.div`

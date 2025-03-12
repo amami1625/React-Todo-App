@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 import { Todo } from "../types/type";
 
@@ -14,12 +14,10 @@ const H2 = styled.h2`
 
 type CompletedListProps = {
   todos: Todo[];
-  children: ReactElement[];
+  children: ReactNode;
 };
 
-const CompletedList = ({
-  children,
-}: CompletedListProps) => {
+const CompletedList = ({ children }: CompletedListProps) => {
   return (
     <>
       <H2>完了済のタスク</H2>
