@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
@@ -15,13 +16,13 @@ type TodoListProps = {
   children: ReactNode;
 };
 
-const TodoList = ({ children }: TodoListProps) => {
+const TodoList = React.memo(({ children }: TodoListProps) => {
   return (
     <>
       <H2>未完了のタスク</H2>
       <Ul>{children}</Ul>
     </>
   );
-};
+});
 
 export default TodoList;

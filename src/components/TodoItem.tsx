@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Todo } from "../types/type";
 import Button from "./common/Button";
+import React from "react";
 
 const Li = styled.li`
   display: flex;
@@ -24,16 +25,18 @@ type TodoItemProps = {
   updateHandler: (id: string) => void;
 };
 
-const TodoItem = ({ todo, deleteHandler, updateHandler }: TodoItemProps) => {
-  return (
-    <Li>
-      <Label>{todo.title}</Label>
-      <Wrapper>
-        <Button text="完了" clickHandler={() => updateHandler(todo.id)} />
-        <Button text="削除" clickHandler={() => deleteHandler(todo.id)} />
-      </Wrapper>
-    </Li>
-  );
-};
+const TodoItem = React.memo(
+  ({ todo, deleteHandler, updateHandler }: TodoItemProps) => {
+    return (
+      <Li>
+        <Label>{todo.title}</Label>
+        <Wrapper>
+          <Button text="完了" clickHandler={() => updateHandler(todo.id)} />
+          <Button text="削除" clickHandler={() => deleteHandler(todo.id)} />
+        </Wrapper>
+      </Li>
+    );
+  }
+);
 
 export default TodoItem;
