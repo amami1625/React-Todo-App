@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -8,7 +8,7 @@ const Div = styled.div`
 `;
 
 type ContainerProps = {
-  children: ReactElement[];
+  children: ReactNode;
 };
 
 const container = ({ children }: ContainerProps) => {
