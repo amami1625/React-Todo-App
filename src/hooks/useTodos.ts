@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Todo } from "../types/type";
 import {
   addDoc,
@@ -32,7 +32,7 @@ export const useTodos = () => {
     fetchTodos();
   }, []);
 
-  const handleTodoAdd = async (title: string) => {
+  const handleTodoAdd = useCallback(async (title: string) => {
     try {
       await addDoc(collection(db, "todos"), {
         title,
@@ -41,16 +41,16 @@ export const useTodos = () => {
     } catch (err) {
       console.error("タスクの追加に失敗しました: ", err);
     }
-  };
+  }, []);
 
-  const handleTodoUpdate = async (id: string) => {
+  const handleTodoUpdate = useCallback(async (id: string) => {
     const completed = doc(db, "todos", id);
     await updateDoc(completed, {
       isCompleted: true,
     });
-  };
+  }, []);
 
-  const handleTodoDelete = async (id: string) => {
+  const handleTodoDelete = useCallback(async (id: string) => {
     try {
       if (confirm("タスクを削除しますか？")) {
         await deleteDoc(doc(db, "todos", id));
@@ -58,9 +58,9 @@ export const useTodos = () => {
     } catch (err) {
       console.error("タスクの削除に失敗しました: ", err);
     }
-  };
+  }, []);
 
-  const handleTodoDeleteCompleted = async (todos: Todo[]) => {
+  const handleTodoDeleteCompleted = useCallback(async (todos: Todo[]) => {
     try {
       if (confirm("完了済みのタスクを削除しますか？")) {
         await Promise.all(
@@ -70,7 +70,7 @@ export const useTodos = () => {
     } catch (err) {
       console.error("タスクの削除に失敗しました: ", err);
     }
-  };
+  }, []);
 
   return {
     todos,
