@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import { Todo } from "../types/type";
 
@@ -7,13 +14,14 @@ export const useCompletedTodos = () => {
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
-      const docs = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Todo[];
-
-      setCompletedTodos(docs.filter((doc) => doc.isCompleted));
+    const q = query(collection(db, "todos"), where("isCompleted", "==", true));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setCompletedTodos(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Todo[]
+      );
     });
     return () => unsubscribe(); // クリーンアップ処理
   }, []);
