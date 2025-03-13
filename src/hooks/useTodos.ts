@@ -12,7 +12,6 @@ import { db } from "../firebase";
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
@@ -22,7 +21,6 @@ export const useTodos = () => {
       })) as Todo[];
 
       setTodos(docs.filter((doc) => !doc.isCompleted));
-      setCompletedTodos(docs.filter((doc) => doc.isCompleted));
     });
     return () => unsubscribe(); // クリーンアップ処理
   }, []);
@@ -57,23 +55,10 @@ export const useTodos = () => {
     }
   }, []);
 
-  const handleTodoDeleteCompleted = useCallback(async () => {
-    if (!confirm("完了済みのタスクを削除しますか？")) return;
-    try {
-      await Promise.all(
-        completedTodos.map((todo) => deleteDoc(doc(db, "todos", todo.id)))
-      );
-    } catch (err) {
-      console.error("タスクの削除に失敗しました: ", err);
-    }
-  }, []);
-
   return {
     todos,
-    completedTodos,
     handleTodoAdd,
     handleTodoUpdate,
     handleTodoDelete,
-    handleTodoDeleteCompleted,
   };
 };
