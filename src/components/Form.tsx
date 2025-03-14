@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "./common/Button";
 
@@ -21,19 +21,22 @@ type FormProps = {
 };
 
 const Form = React.memo(({ addHandler }: FormProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState<string>("");
+
+  const changeHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const title = inputRef.current?.value ?? "";
     if (title === "") return;
     addHandler(title);
-    if (inputRef.current) inputRef.current.value = "";
+    setTitle("");
   };
 
   return (
     <FormElm onSubmit={submitHandler}>
-      <Input type="text" ref={inputRef} />
+      <Input type="text" value={title} onChange={changeHandler} />
       <Button text="タスクを追加" />
     </FormElm>
   );
