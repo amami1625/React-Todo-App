@@ -13,7 +13,7 @@ const H2 = styled.h2`
 `;
 
 type TodoListProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const TodoList = React.memo(({ children }: TodoListProps) => {
