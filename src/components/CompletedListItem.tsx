@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Button from "./common/Button";
 import { Todo } from "../types/type";
-import { useTodos } from "../hooks/useTodos";
 
 const Li = styled.li`
   font-size: 1.3rem;
@@ -18,18 +17,17 @@ const Label = styled.label`
 
 type CompletedListItemProps = {
   todo: Todo;
+  updateHandler: (id: string, isCompleted: boolean) => Promise<void>;
 };
 
-const CompletedListItem = ({ todo }: CompletedListItemProps) => {
-  const { handleTodoUpdate } = useTodos();
-
+const CompletedListItem = ({ todo, updateHandler }: CompletedListItemProps) => {
   return (
     <Li>
       <Label>{todo.title}</Label>
       <Button
         text="未完了に戻す"
         clickHandler={() => {
-          handleTodoUpdate(todo.id, todo.isCompleted);
+          updateHandler(todo.id, todo.isCompleted);
         }}
       />
     </Li>
