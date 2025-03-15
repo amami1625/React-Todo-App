@@ -13,7 +13,7 @@ const CompletedListModal = () => {
   return (
     <Modal>
       <CloseButton clickHandler={toggleCompletedModal} />
-      <CompletedList todos={completedTodos}>
+      <CompletedList>
         {completedTodos.map((todo) => (
           <CompletedListItem todo={todo} key={todo.id} />
         ))}

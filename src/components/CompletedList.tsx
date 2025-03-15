@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { Todo } from "../types/type";
 
 const Ul = styled.ul`
   list-style: none;
@@ -13,8 +12,7 @@ const H2 = styled.h2`
 `;
 
 type CompletedListProps = {
-  todos: Todo[];
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const CompletedList = ({ children }: CompletedListProps) => {
