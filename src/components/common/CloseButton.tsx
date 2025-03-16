@@ -26,7 +26,7 @@ type CloseButtonProps = {
 const CloseButton = React.memo(({ clickHandler }: CloseButtonProps) => {
   return (
     <Div>
-      <Span onClick={clickHandler}>x</Span>
+      <Span role="button" onClick={clickHandler}>x</Span>
     </Div>
   );
 });
