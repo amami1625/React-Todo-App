@@ -11,8 +11,8 @@ type ContainerProps = {
   children: ReactNode;
 };
 
-const container = ({ children }: ContainerProps) => {
+const Container = ({ children }: ContainerProps) => {
   return <Div>{children}</Div>;
 };
 
-export default container;
+export default Container;
