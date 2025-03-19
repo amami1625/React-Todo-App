@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 type ModalProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const ModalWrapper = styled.div`
@@ -34,9 +34,9 @@ const ModalContent = styled.div`
 
 const Modal = ({ children }: ModalProps) => {
   return (
-    <ModalWrapper>
-      <ModalBody>
-        <ModalContent>{children}</ModalContent>
+    <ModalWrapper data-testid="modal-wrapper">
+      <ModalBody data-testid="modal-body">
+        <ModalContent data-testid="modal-content">{children}</ModalContent>
       </ModalBody>
     </ModalWrapper>
   );
